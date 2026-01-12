@@ -1,1 +1,12 @@
-111
+This code implements a **hybrid CNN-GRU model integrated with Multi-Scale Self-Attention (MSSA)**, primarily designed for **sequential data classification tasks** (e.g., category recognition of spectral reflectance data). Its core lies in combining the local feature extraction capability of Convolutional Neural Networks (CNNs), the temporal modeling ability of Gated Recurrent Units (GRUs), and the feature enhancement performance of multi-scale self-attention to improve classification accuracy.
+
+### Core Modules and Workflow
+1. **MSSA (Multi-Scale Self-Attention) Module**: It extracts local features of different granularities using three types of convolution kernels with scales 1, 3, and 5. After feature fusion, a self-attention mechanism is applied to assign higher weights to important features, strengthening the representation of key information.
+2. **CNNGRU Main Model**: It consists of two branches. The **CNN branch** extracts local sequential features through three layers of dilated convolution, which are then enhanced by MSSA and flattened. The **GRU branch** performs temporal modeling on the original sequence to extract global temporal features. Finally, the features from the two branches are concatenated, and classification is completed through a fully connected layer.
+3. **Data Processing and Training**: Sequential data in Excel format (the first column for labels, the rest for features) is loaded, split into training/validation/test sets and converted into PyTorch tensors. The model is trained for 300 epochs using the Adam optimizer and cross-entropy loss, with real-time tracking of loss and accuracy on the training, validation, and test sets throughout the process.
+4. **Model Evaluation**: It outputs a classification report (precision, recall, F1-score), confusion matrix, Overall Accuracy (OA), and Kappa coefficient. Additionally, it visualizes loss curves, accuracy curves, and the confusion matrix to intuitively evaluate model performance.
+
+### Key Features
+- Combines **multi-scale processing and self-attention** to address the insufficiency of single-scale feature representation.
+- Fuses **CNNs (local features) and GRUs (temporal features)** to capture both local and global information of the sequence.
+- Monitors test set performance throughout training and outputs a variety of quantitative evaluation metrics and visual results, facilitating model analysis and tuning.
